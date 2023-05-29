@@ -1,31 +1,63 @@
+#python 3.10.7
 # use 'shift+enter' in vscode to execute one line
 
 def numbers():
     "numbers"
-    print(4*3, 4**3, pow(4,3), sep=", ") # multiply, power
-    print(8.5//2, 8.5%2, divmod(8.5, 2), sep=", ") # divide whole, mod (remainder), and both in a tuple
+    print("seperating long numbers:", 0b0111_1001_1100,1.234_567)
+    print("multiply and power:", 4*3, 4**3, pow(4,3), sep=", ")
+    print("integers divison, mod, both:", 8.5//2, 8.5%2, divmod(8.5, 2), sep=", ")
     print(round(2232.343452, 1), round(2232.343452, -3), abs(-5.4))
-    
-    #complex numbers:
+    print((3/64), (3/64).as_integer_ratio())
     c = complex(1,2)
-    print("complex number", c, c.real, c.imag, pow(c,2), c**2, abs(c), c.conjugate())
-    #different number bases:
-    print("numbers:", 123e-4, 0x03A, 0b10 + 0x1a*1j, complex(0b10, 0x1a), 0b01001, 0o42)
-    #converting between them:
-    print("converting bases:", hex(255), bin(0b111), oct(64), int("16", base=22), int("0x16",base=0))
+    print("complex number:", c, c.real, c.imag, pow(c,2), c**2, abs(c), c.conjugate())
+    print("different bases:", 123e-4, 0x03A, 0b10 + 0x1a*1j, complex(0b10, 0x1a), 0b01001, 0o42)
+    print("converting between bases:", hex(255), bin(0b111), oct(64), int("16", base=22), int("0x16",base=0))
 
-    #math module
-    import math
+    
+    import math #math module
     print(math.sqrt(16.4), math.ceil(5/4), math.cos(math.pi), math.factorial(5))
 
 def strings():
     "strings"
     str_1 = "A"
     str_2 = "B"
-    print((str_1 + str_2)*3) # adding and multiplying strings
-    print(str_1*3 == "aaa".upper(), str_1 == str_2, str_1 < str_2, "a" < str_2)
-    print(ord("a"), chr(65))
-    #formatting
+    print('strings with different',"quote styles",'''as
+    well''',"""as""", "contcatenation by"
+    '-spanning multiple' #can easily comment part of string
+    """-lines""")
+    print("bytes instead of str:", b"1\n23 hex: \x41 octal: \101 \141", type(b"1234"))
+    print("raw strings:", "1\t\t2", r"3\t4", br"5\t6")
+    print("🔥 unicode 8-bit: \x41 16-bit: \u05D0\u05D1\u05D2  and 32-bit: \U0001F600")
+    
+    print("adding and multiplying:", (str_1 + str_2)*3)
+    print("comparing:", str_1*3 == "aaa".upper(), str_1 == str_2, str_1 < str_2, "a" < str_2)
+    print("unicode/ascii:", ord("a"), chr(65))
+    print("converting to string, str() is ment to be user firendly", str({'a': 5, 6: 'c'}), str(range(3)), str("Hi\nthere"))
+    print("repr is meant to be eval(repr(a))==a, ascii() is similar but excaping non ascii:", repr("Hi\nthere"), ascii("Hi\nthere"))
+    
+    
+    print("legacy - formatting strings the %s way, not recom%dnded" % ("very old", 3))
+    print("legacy - formating strings - the {1} withmore control ~{0}~".format(5.65/32, "sort of old way"))
+    print("legacy - formating strings - referenced by name {first} with {sec\ond}".format(first="f", second="s"))
+    print('format specifier: [[fill]align][sign]["z"]["#"]["0"][width][grouping_option]["." precision][type]')
+    print(f"printing expression text with it's value '{3  *6= :d}' (preserves whitespaces)")
+    print(f"strings: string {str_1} {str_1*3:s}, escaping {{curly braces}}")
+    print(f"integers: decimal {12} {12:d}, hex {256:x} {256:#x}, bin {36:#b}, char {65=:c}")
+    print(f"floats: float {1.234:.1f}, scientific {314159:.4E}, general {314159:.4g}, percent (like 100*f){0.4321:.2%}")
+    print(f"sign: ('{+12:+2d}', '{-12:+2d}'), ('{+12: 2d}', '{-12: 2d}'), ('{+12:-2d}', '{-12:-2d}')")
+    print(f"thousands seperator: '{-1234:+6,d}', '{1234:14_d}'")
+    print(f"padding and alignment: '{12}' '{12:4}', '{12:!>4}', '{12:@^4}', '{12:#<4}', '{12:_^+5}', '{12:_=+5}'")
+    char, precision = "🔥", 3
+    print(f"nested format specifiers '{3*5.25313:{char}^15.{precision}f}'.")
+    print(f"converting to str (default) {range(3)!s}, repr {range(3)!r}, ascii {range(3)!a}")
+    import datetime
+    now = datetime.datetime(2023, 5, 30)
+    print(f"formatting date. now is {now:%d.%m.%Y}")
+    
+
+    #slicing is part of list
+    #reverse, join
+    d = {'a':3, 'b':5}
 
 def logic():
     "logic"
@@ -47,13 +79,22 @@ def logic():
     any(["dc"])
     #iterables or more than two arguments, supporting comparison
     max(3,4,7,6)
-    min(["abc", "b", "abfs"])
+    min(["abc", "B", "abfs"], key=str.upper) # because ABC < B
+    min([[1,2,8], [3,4,9], [4,5,6]], key=max) # list with smallest maximum
 
 def lists():
     "lists and alike"
     a,b = 3,4
     #turns into
+    #unpacking lists *
+    #unpacking dictionaried * and ** 
     (a,b) = (3,4)
+
+def function():
+    "docstring of a function"
+    #function parameters - names, defaults
+    #parameters with * and ** and names.
+
 
 def objects():
     "objects"
@@ -119,6 +160,8 @@ def general():
     help(print) # built in help function
     dir(__builtins__) #all built in functions
     help(__builtins__)
+    print("ignoring a\
+           new line")
     #print:
     print("controlling", "seperation","as well as", sep="-", end="|r|n")
     print("end of line")
@@ -127,3 +170,59 @@ def general():
 
 if __name__ == "__main__": #runs only is this file is the one that's running (and not included from somewhere else)
     pass #pass can be used to fill in empty spaces where an indentation is needed.
+
+
+
+
+
+class fg:
+    BLACK = '\x1B[30m'
+    RED = '\x1B[31m'
+    GREEN = '\x1B[32m'
+    YELLOW = '\x1B[33m'
+    BLUE = '\x1B[34m'
+    MAGENTA = '\x1B[35m'
+    CYAN = '\x1B[36m'
+    WHITE = '\x1B[37m'
+    RESET = '\x1B[39m'
+
+
+class bg:
+    BLACK = '\x1B[40m'
+    RED = '\x1B[41m'
+    GREEN = '\x1B[42m'
+    YELLOW = '\x1B[43m'
+    BLUE = '\x1B[44m'
+    MAGENTA = '\x1B[45m'
+    CYAN = '\x1B[46m'
+    WHITE = '\x1B[47m'
+    RESET = '\x1B[49m'
+
+
+class style:
+    BRIGHT = '\x1B[1m'
+    DIM = '\x1B[2m'
+    NORMAL = '\x1B[22m'
+    RESET_ALL = '\x1B[0m'
+
+# ANSI escape code.
+# using json files.
+
+
+def print_rgb(string, r, g, b, b_r, b_g, b_b):
+    def color(c1, c2, c3): return (str(c1)+";" + str(c2) + ";" + str(c3))
+    print("\x1B[38;2;" + color(r, g, b) + "m" +
+          "\x1B[48;2;" + color(b_r, b_g, b_b) + "m" +
+          string + "\033[0m", end="")
+
+
+def print_rgb_front(string, r, g, b):
+    def color(c1, c2, c3): return (str(c1)+";" + str(c2) + ";" + str(c3))
+    print("\x1B[38;2;" + color(r, g, b) + "m" +
+          string + "\033[0m", end="")
+
+for r in range(0, 255, 20):
+        for g in range(0, 255, 20):
+            for b in range(0, 255, 20):
+                print_rgb("H", 255-r, 255-g, 255-b, r, g, b)
+                print_rgb_front("H", r, g, b)
