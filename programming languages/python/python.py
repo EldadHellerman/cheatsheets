@@ -54,7 +54,7 @@ def strings():
     now = datetime.datetime(2023, 5, 30)
     print(f"formatting date. now is {now:%d.%m.%Y}")
     
-
+    
     #slicing is part of list
     #reverse, join
     d = {'a':3, 'b':5}
@@ -94,6 +94,7 @@ def function():
     "docstring of a function"
     #function parameters - names, defaults
     #parameters with * and ** and names.
+    #lambda functions
 
 
 def objects():
@@ -155,77 +156,46 @@ def libraries():
     
     #how to import
 
-def general():
-    "general things"
-    help(print) # built in help function
-    dir(__builtins__) #all built in functions
-    help(__builtins__)
-    print("ignoring a\
-           new line")
-    #print:
-    print("controlling", "seperation","as well as", sep="-", end="|r|n")
-    print("end of line")
-    # a
+def input_output():
+    # ANSI escape code.
+    color_foreground = {'BLACK': '\x1B[30m', 'RED': '\x1B[31m', 'GREEN': '\x1B[32m', 'YELLOW': '\x1B[33m', 'BLUE': '\x1B[34m', 'MAGENTA': '\x1B[35m', 'CYAN': '\x1B[36m', 'WHITE': '\x1B[37m', 'RESET': '\x1B[39m'}
+    color_foreground_bright = {'BLACK': '\x1B[90m', 'RED': '\x1B[91m', 'GREEN': '\x1B[92m', 'YELLOW': '\x1B[93m', 'BLUE': '\x1B[94m', 'MAGENTA': '\x1B[95m', 'CYAN': '\x1B[96m', 'WHITE': '\x1B[97m'}
+    color_background = {'BLACK': '\x1B[40m', 'RED': '\x1B[41m', 'GREEN': '\x1B[42m', 'YELLOW': '\x1B[43m', 'BLUE': '\x1B[44m', 'MAGENTA': '\x1B[45m', 'CYAN': '\x1B[46m', 'WHITE': '\x1B[47m', 'RESET': '\x1B[49m'}
+    color_background_bright = {'BLACK': '\x1B[100m', 'RED': '\x1B[101m', 'GREEN': '\x1B[102m', 'YELLOW': '\x1B[103m', 'BLUE': '\x1B[104m', 'MAGENTA': '\x1B[105m', 'CYAN': '\x1B[106m', 'WHITE': '\x1B[107m'}
+    style = {'BOLD': '\x1B[1m', 'ITALIC': '\x1B[3m', 'UNDERLINE': '\x1B[4m', 'REVERSE': '\x1B[7m', 'HIDDEN': '\x1B[8m', 'STRIKETHROUGH': '\x1B[9m', 'RESET_ALL': '\x1B[0m',
+             'NBOLD': '\x22B[21m', 'NITALIC': '\x1B[23m', 'NUNDERLINE': '\x1B[24m', 'NREVERSE': '\x1B[27m', 'NHIDDEN': '\x1B[28m', 'NSTRIKETHROUGH': '\x1B[29m'}
+    RESET_ALL = '\x1B[0m'
+    print(color_foreground['RED'] + "ANSI escape " +  color_background['YELLOW'] + "codes and styles: " + style['ITALIC'] + " italic " + style['BOLD'] + " BOLD ")
+    print("remains until " + style["UNDERLINE"] + " reset " + style["NUNDERLINE"] + style["STRIKETHROUGH"] + "is performed" + RESET_ALL)
+    rgb = lambda c1, c2, c3: str(c1)+";" + str(c2) + ";" + str(c3)
+    print("custom rgb " + '\x1B[38;2;'+rgb(70, 20, 90)+'m' "foreground and background: ")
+    for g in range(255): print('\x1B[48;2;'+rgb(0, g, 0)+'m' + "B", end='')
+    print(RESET_ALL)
+
+    #files
     #open and close files:
     # with a as f1, b as f2:
     # with (a as f1
     #       b as f2):
 
-if __name__ == "__main__": #runs only is this file is the one that's running (and not included from somewhere else)
+    #object serialization
+    # using json files.
+    pass
+
+
+def general():
+    "general things"
+    help(print) # built in help function
+    dir(__builtins__) #all built in functions
+    help(__builtins__)
+    print("nackslash ignoring a\
+           new line")
+    #print:
+    print("controlling", "seperation","as well as", sep="-", end="|r|n")
+    print("end of line")
+    # a
+
+
+if __name__ == "__main__": #it's __main__ only if this file is the one that's running (and not included from somewhere else)
     pass #pass can be used to fill in empty spaces where an indentation is needed.
 
-
-
-
-
-class fg:
-    BLACK = '\x1B[30m'
-    RED = '\x1B[31m'
-    GREEN = '\x1B[32m'
-    YELLOW = '\x1B[33m'
-    BLUE = '\x1B[34m'
-    MAGENTA = '\x1B[35m'
-    CYAN = '\x1B[36m'
-    WHITE = '\x1B[37m'
-    RESET = '\x1B[39m'
-
-
-class bg:
-    BLACK = '\x1B[40m'
-    RED = '\x1B[41m'
-    GREEN = '\x1B[42m'
-    YELLOW = '\x1B[43m'
-    BLUE = '\x1B[44m'
-    MAGENTA = '\x1B[45m'
-    CYAN = '\x1B[46m'
-    WHITE = '\x1B[47m'
-    RESET = '\x1B[49m'
-
-
-class style:
-    BRIGHT = '\x1B[1m'
-    DIM = '\x1B[2m'
-    NORMAL = '\x1B[22m'
-    RESET_ALL = '\x1B[0m'
-
-# ANSI escape code.
-# using json files.
-
-
-def print_rgb(string, r, g, b, b_r, b_g, b_b):
-    def color(c1, c2, c3): return (str(c1)+";" + str(c2) + ";" + str(c3))
-    print("\x1B[38;2;" + color(r, g, b) + "m" +
-          "\x1B[48;2;" + color(b_r, b_g, b_b) + "m" +
-          string + "\033[0m", end="")
-
-
-def print_rgb_front(string, r, g, b):
-    def color(c1, c2, c3): return (str(c1)+";" + str(c2) + ";" + str(c3))
-    print("\x1B[38;2;" + color(r, g, b) + "m" +
-          string + "\033[0m", end="")
-
-for r in range(0, 255, 20):
-        for g in range(0, 255, 20):
-            for b in range(0, 255, 20):
-                print_rgb("H", 255-r, 255-g, 255-b, r, g, b)
-                print_rgb_front("H", r, g, b)
