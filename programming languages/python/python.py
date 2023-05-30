@@ -1,4 +1,4 @@
-#python 3.10.7
+# python 3.10.7
 # use 'shift+enter' in vscode to execute one line
 
 def numbers():
@@ -35,7 +35,7 @@ def strings():
     print("converting to string, str() is ment to be user firendly", str({'a': 5, 6: 'c'}), str(range(3)), str("Hi\nthere"))
     print("repr is meant to be eval(repr(a))==a, ascii() is similar but excaping non ascii:", repr("Hi\nthere"), ascii("Hi\nthere"))
     
-    
+
     print("legacy - formatting strings the %s way, not recom%dnded" % ("very old", 3))
     print("legacy - formating strings - the {1} withmore control ~{0}~".format(5.65/32, "sort of old way"))
     print("legacy - formating strings - referenced by name {first} with {sec\ond}".format(first="f", second="s"))
@@ -167,6 +167,9 @@ def general():
     print("end of line")
     # a
     #open and close files:
+    # with a as f1, b as f2:
+    # with (a as f1
+    #       b as f2):
 
 if __name__ == "__main__": #runs only is this file is the one that's running (and not included from somewhere else)
     pass #pass can be used to fill in empty spaces where an indentation is needed.
