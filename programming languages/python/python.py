@@ -13,7 +13,6 @@ def numbers():
     print("different bases:", 123e-4, 0x03A, 0b10 + 0x1a*1j, complex(0b10, 0x1a), 0b01001, 0o42)
     print("converting between bases:", hex(255), bin(0b111), oct(64), int("16", base=22), int("0x16",base=0))
 
-    
     import math #math module
     print(math.sqrt(16.4), math.ceil(5/4), math.cos(math.pi), math.factorial(5))
 
@@ -53,11 +52,26 @@ def strings():
     import datetime
     now = datetime.datetime(2023, 5, 30)
     print(f"formatting date. now is {now:%d.%m.%Y}")
+
+    s = "string METHODS"
+    print("manual formatting: ", str(15).zfill(5), "Hi".rjust(10,"_"), "and".center(10),"bye".ljust(10,"*"))
+    print(s.capitalize(), s.upper(), "STRING methods".lower(), s.title(), s.swapcase(), "HI".isupper(), "byE".islower(), sep=" - ")
+    print("replacing: ", "hi\tthere".replace('\t'," - "), "and expanding tabs:", "hi\tthere".expandtabs(8))
+    print(s.find("ring"), "ABCAD".rindex("A"), s.find("A"), "index() is like find(), except it raises an error if not found", sep=", ")
+    print("string" in s, s.startswith("str"), s.endswith("THODS"), "banana".count("na"), "banana".count("ana"), sep=", ")
     
-    
-    #slicing is part of list
-    #reverse, join
-    d = {'a':3, 'b':5}
+    number, square, half, snumber = "20", "5²", "½", "-3"
+    print("is numeric?", number.isnumeric(), square.isnumeric(), half.isnumeric(), snumber.isnumeric())
+    print("is digit?", number.isdigit(), square.isdigit(), half.isdigit(), snumber.isnumeric())
+    print("is decimal?", number.isdecimal(), square.isdecimal(), half.isdecimal(), snumber.isnumeric())
+    print("is ½ ascii?", half.isascii(), ", is h3llo alpha?", "h3llo".isalpha(), " maybe alphanumeric?", "h3llo".isalnum());
+
+    print("-".join("12345"), "_".join(['A', 'B', 'C', 'D']))
+    print("  www.github.com".strip("mw. "),)
+    print("BANANA".partition("ANA"), "BANANA".split("ANA"), "BANANA".rsplit("A"))
+    print("useful\nwhen\r\n  reading\n\rfiles  \n".splitlines())
+    table = {ord('a'): ord('c'), ord('b'): ord('b'), ord('c'): ord('f'), ord('e'): None}
+    print("mapping strings:", "abcde".translate(table))
 
 def logic():
     "logic"
@@ -67,7 +81,6 @@ def logic():
         pass
     elif:
         pass
-    #loops
     #case
 
     #sum runs on iterables supporting cating to int
@@ -85,10 +98,47 @@ def logic():
 def lists():
     "lists and alike"
     a,b = 3,4
+    #tuples
+    #lists
+    #dictionareis
+    #sets
+    #frozen sets
     #turns into
     #unpacking lists *
     #unpacking dictionaried * and ** 
     (a,b) = (3,4)
+    #list(iterable)
+    #slicing, duplicating
+
+def iterables():
+    pass
+    
+    # range()
+    # reversed()
+    # iter()
+    # next()
+    # sorted()
+
+    #frozenset()
+
+    #enumerate
+    #zip
+    #map
+    #filter:
+        # Note that filter(function, iterable) is equivalent to the generator expression:
+        # (item for item in iterable if function(item))
+        # if function is not None and:
+        # (item for item in iterable if item)
+        # if function is None.
+
+def loops():
+    pass
+    #loops
+    #iterables - lists tuples strings sets
+    #generators
+    
+    
+    #dc
 
 def function():
     "docstring of a function"
@@ -106,6 +156,9 @@ def objects():
     # ojbect id is unique for that object in it's liftime:
     print("objects id", id(5), id(2+3), id(5.0), id(5+0j), sep='\n')
     
+    #hash() used for dictionary comparison
+    print("lengths are: ", len("hello"), len([1,2,3,4]), len((1,2,3)), len({1:2, 3:4}), len(range(1)))
+
     # int objects in the range [-5,256] are chached at startup, so they always have the same id
     a = 29; b = 30
     c = -10; d = -9
@@ -133,19 +186,47 @@ def objects():
     # when an objects references count reaches 0 the memory is (immeaditly) claimed.
     # pythons garbage collection is mainly used for cyclic references.
 
+    # getattr()
+    # setattr()
+    # delattr()
+    # hasattr
+    # isinstance()
+    # issubclass()
+    
+
+def oop():
+    "object oriented programming"
+    class myclass:
+        def func1(self):
+            pass
+    # @staticmethod
+    # super
+    @classmethod
+    def class_method(_class):
+        pass
+    # class C:
+    #     def __init__(self):
+    #         self._x = None
+
+    #     def getx(self):
+    #         return self._x
+
+    #     def setx(self, value):
+    #         self._x = value
+
+    #     def delx(self):
+    #         del self._x
+
+    x = property(getx, setx, delx, "I'm the 'x' property.")
+    #methods are class functions that depened on the object:
+    print("hello".upper()) #print is a function, upper is a method
+
+
 def exceptions():
     #exception objects
     #try
     pass
 
-def oop():
-    "object oriented programming"
-    class myclass:
-        def func1():
-            pass
-
-    #methods are class functions that depened on the object:
-    print("hello".upper()) #print is a function, upper is a method
 
 def libraries():
     "libraries and modules"
@@ -172,6 +253,8 @@ def input_output():
     for g in range(255): print('\x1B[48;2;'+rgb(0, g, 0)+'m' + "B", end='')
     print(RESET_ALL)
 
+    x = input("x will be your input (EOF raises EOFError): ")
+    open()
     #files
     #open and close files:
     # with a as f1, b as f2:
@@ -193,7 +276,12 @@ def general():
     #print:
     print("controlling", "seperation","as well as", sep="-", end="|r|n")
     print("end of line")
-    # a
+    eval("print('evaluting a string as a single expression')")
+    exec("print('executing whole python', end='')\nprint(' programs from strings')")
+    
+    # print("all names in current scope:", dir())
+    # print("some more: ", globals(), locals(), vars())
+
 
 
 if __name__ == "__main__": #it's __main__ only if this file is the one that's running (and not included from somewhere else)
